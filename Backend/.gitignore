@@ -1,0 +1,5 @@
+# Node modules (big files, not needed in Git)
+node_modules/
+
+# Environment file (keep passwords safe)
+.env
