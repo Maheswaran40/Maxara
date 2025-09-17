@@ -36,7 +36,9 @@ const imageSchema = new mongoose.Schema({
   name: String,          // product name
   price: Number,
   category: String,
-  desc: String           // product description
+  desc: String   ,
+  offer: String,     // add this
+  dashprice: Number        // product description
 });
 
 const dataModel = mongoose.model("images", imageSchema); // <- collection name 'images'

@@ -203,7 +203,6 @@ function Form() {
                     className="form-control"
                     value={updateName}
                     onChange={(e) => setupdateName(e.target.value)}
-                    required
                   />
                   <br />
 
@@ -213,7 +212,6 @@ function Form() {
                     className="form-control"
                     value={updatePrice}
                     onChange={(e) => setupdatePrice(e.target.value)}
-                    required
                   />
                   <br />
 
@@ -222,7 +220,6 @@ function Form() {
                     className="form-control"
                     value={updateCategory}
                     onChange={(e) => setupdateCategory(e.target.value)}
-                    required
                   >
                     <option hidden>choose</option>
                     <option>shop</option>
@@ -236,7 +233,6 @@ function Form() {
                     className="form-control"
                     value={updateDesc}
                     onChange={(e) => setupdateDesc(e.target.value)}
-                    required
                   />
                   <br />
                   <input type="submit" className="btn btn-success" />

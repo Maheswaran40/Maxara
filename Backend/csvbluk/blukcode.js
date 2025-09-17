@@ -43,7 +43,10 @@ fs.createReadStream("csvbluk/imageData.csv", { encoding: "utf8" })
                 ? parseFloat(normalizedRow.price)
                 : null,
               category: (normalizedRow.category || "").trim(),
-              desc: (normalizedRow.desc || "").trim()
+              desc: (normalizedRow.desc || "").trim(),
+              offer: (normalizedRow.offer || "").trim(),           // ✅ new
+      dashprice: (!isNaN(parseFloat(normalizedRow.dashprice)) )? parseFloat(normalizedRow.dashprice)
+                : null
             }
           },
           { upsert: true }

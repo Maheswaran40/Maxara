@@ -12,6 +12,10 @@ try{
 
 }
 catch(err){
+     if (err.code === 11000) {
+      // Duplicate key error
+      return res.status(400).json({ message: "Email already exists" });
+    }
     res.status(404).send(`user data adding error ${err}`)
 }
 }
