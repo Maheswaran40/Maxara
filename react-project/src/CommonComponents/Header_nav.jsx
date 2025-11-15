@@ -13,6 +13,7 @@ import sports from "../assets/images/game.png";
 import bags from "../assets/images/school-bag.png";
 import caps from "../assets/images/cap.png";
 import jersey from "../assets/images/soccer-jersey.png";
+import Logout from "../pages/Allproduct/Logout";
 
 function Header_nav() {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ function Header_nav() {
               </h4>
             </button>
           </div>
-          <div className="col-6 d-flex justify-content-around align-items-center px-0">
+          <div className="col-6 d-flex justify-content-around align-items-center px-0 mb-1">
             <p className="p-0 m-0">All sports</p>
           </div>
         </div>
@@ -92,7 +93,7 @@ function Header_nav() {
 
         {/* icons */}
         <div id="icons" className="d-flex justify-content-around nav-icons">
-          <span>
+           <span>
             <Link className="Link" to={"/home"}>
               <h5 className="p-0 m-0">
                 <i
@@ -104,6 +105,19 @@ function Header_nav() {
               </h5>
             </Link>
             <p>Home</p>
+          </span>
+          <span className="p-0">
+            {/* <Link className="Link" to={"/"}>
+              <h5 className="p-0 m-0">
+                <i
+                  class="fa-solid fa-house"
+                  style={{
+                    color: location.pathname === "/home" ? "blue" : "black",
+                  }}
+                ></i>
+              </h5>
+            </Link> */}
+           <Logout/>
           </span>
           <span
             data-bs-toggle="offcanvas"
@@ -167,11 +181,11 @@ function Header_nav() {
               className="form-control"
               onChange={seacrhInput}
             />
-            <input
+            <button
               type="submit"
               className=" btn"
-              style={{ backgroundColor: "blue", color: "white" }}
-            />
+              style={{ backgroundColor: "blue", color: "white",height:"49px" }}
+            ><i className="fa-solid fa-magnifying-glass nav-icon"></i></button>
           </form>
           <br />
           {!searchdata ? (
@@ -346,55 +360,55 @@ function Header_nav() {
         <hr style={{ margin: "0" }} />
         {/* canvas body */}
         <div className="offcanvas-body" id="nav-canvas">
-          <Link id="allsport" to={"/shoes"}>
+          <Link id="allsport" to={"/shoes"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               shoes
               <img src={shoe} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/caps"}>
+          <Link id="allsport" to={"/caps"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               caps
               <img src={caps} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/bags"}>
+          <Link id="allsport" to={"/bags"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Bags
               <img src={bags} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/sleeves"}>
+          <Link id="allsport" to={"/sleeves"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               jersey
               <img src={jersey} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/tshirts"}>
+          <Link id="allsport" to={"/tshirts"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Tshirts
               <img src={tshirts} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/cycle"}>
+          <Link id="allsport" to={"/cycle"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Cycle and Accescries
               <img src={cycle} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/pants"}>
+          <Link id="allsport" to={"/pants"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Pants
               <img src={pants} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/shirts"}>
+          <Link id="allsport" to={"/shirts"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Shirts
               <img src={shirts} alt="" width={"25px"} height={"20px"} />
             </li>
           </Link>
-          <Link id="allsport" to={"/outdoor"}>
+          <Link id="allsport" to={"/outdoor"} state={{ range: 3000 }}>
             <li className="dropdown-item p-0 " data-bs-dismiss="offcanvas">
               Outdoor Games Product
               <img src={sports} alt="" width={"25px"} height={"20px"} />
@@ -439,40 +453,53 @@ function Header_nav() {
       </div> */}
 
       {/* like model */}
-      <div
-        className="offcanvas offcanvas-top"
-        id="like-canvas"
-        style={{ height: "500px" }}
-      >
-        <div className="offcanvas-header">
-          <h1>Liked Product List</h1>
-          <button
-            className="btn btn-close"
+     {/* like model */}
+<div
+  className="offcanvas offcanvas-top"
+  id="like-canvas"
+  style={{ height: "500px" }}
+>
+  <div className="offcanvas-header">
+    <h1>Liked Product List</h1>
+    <button
+      className="btn btn-close"
+      data-bs-dismiss="offcanvas"
+    ></button>
+  </div>
+
+  <div className="offcanvas-body container">
+    {list && list.length > 0 ? (
+      list.map((value, index) => (
+        <div key={index} className="wishlist-card">
+          <div
+            className="wishlist-img"
+            onClick={() => navigate(`/shop/${value._id}`)}
             data-bs-dismiss="offcanvas"
-          ></button>
+          >
+            <img src={value.url} alt={value.name} />
+          </div>
+          <div className="wishlist-info">
+            <h4>{value.name}</h4>
+            <p className="price">
+              ₹{value.price.toLocaleString("en-IN")}
+            </p>
+          </div>
+          <div>
+            <button
+              onClick={() => deleteFun(index)}
+              className="wishlist-remove"
+            >
+              ✕
+            </button>
+          </div>
         </div>
-        <div className="offcanvas-body container">
-          {list.map((value, index) => (
-            <div key={index} className="wishlist-card">
-              <div className="wishlist-img" onClick={() => navigate(`/shop/${value._id}`)} data-bs-dismiss="offcanvas">
-                <img src={value.url} alt={value.name} />
-              </div>
-              <div className="wishlist-info">
-                <h4>{value.name}</h4>
-                <p className="price">₹{value.price.toLocaleString("en-IN")}</p>
-              </div>
-              <div>
-                <button
-                  onClick={() => deleteFun(index)}
-                  className="wishlist-remove"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      ))
+    ) : (
+      <h5 className="text-center text-capitalize">Your wishlist is empty</h5>
+    )}
+  </div>
+</div>
+
 
       {/* cart canvas */}
       <div
@@ -491,7 +518,7 @@ function Header_nav() {
           <h3 style={{ textAlign: "end" }}>Total Price : ₹{price}</h3>
           <br />
 
-          {cartlist.map((value, index) => (
+          {cartlist && cartlist.length > 0 ? (cartlist.map((value, index) => (
             <div key={index} className="cart-card">
               {/* Product Image */}
               <div className="cart-img" data-bs-dismiss="offcanvas">
@@ -523,7 +550,7 @@ function Header_nav() {
                 </button>
               </div>
             </div>
-          ))}
+          )) ): <h5 className="text-center text-capitalize"> your cart list is Empty</h5>}
         </div>
 
         {/* <table className="container table border-primary table-bordered text-center p-5 mt-2">

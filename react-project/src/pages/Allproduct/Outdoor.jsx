@@ -91,6 +91,7 @@ function Outdoor() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
         </div>
@@ -406,6 +407,7 @@ function Outdoor() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
           <br />
@@ -610,7 +612,13 @@ function Outdoor() {
             .filter(
               (value) =>
                 value.folder === "playkit" &&
-                (value.category === "shop" || value.category === "newarrival")
+                (value.category === "shop" || value.category === "newarrival") && value.price <= Number(rangevalue)
+            ).length>0 ? (
+              productList
+            .filter(
+              (value) =>
+                value.folder === "playkit" &&
+                (value.category === "shop" || value.category === "newarrival") && value.price <= Number(rangevalue)
             )
             .map((value, index) => {
               // Find hover image for this product (same name but with category = "hover")
@@ -707,7 +715,7 @@ function Outdoor() {
                   </div>
                 </div>
               );
-            })}
+            })):<h3 className='d-flex justify-content-center pt-5'>no products available in price range</h3>}
         </div>
         <br />
       </div>

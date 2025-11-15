@@ -41,9 +41,11 @@ function Form() {
                   className="form-input"
                   value={loginPassword}
                   onChange={(e)=>setLoginPassword(e.target.value)}
+                 
 
                 />
-                <button type="submit" className="btn-primary">
+                <button type="submit" className="btn-primary"  onClick={()=>console.log("clicked")
+                  }>
                   Login
                 </button>
               </form>

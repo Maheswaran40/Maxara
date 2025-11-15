@@ -127,6 +127,7 @@ function Bags() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
         </div>
@@ -442,6 +443,7 @@ function Bags() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
           <br />
@@ -650,7 +652,17 @@ function Bags() {
             .filter(
               (value) =>
                 value.folder === "travelbag" &&
-                (value.category === "shop" || value.category === "newarrival")
+                (value.category === "shop" ||
+                  value.category === "newarrival") &&
+                value.price <= Number(rangevalue) // price filter must use the state
+            ).length >0 ?(
+              productList
+            .filter(
+              (value) =>
+                value.folder === "travelbag" &&
+                (value.category === "shop" ||
+                  value.category === "newarrival") &&
+                value.price <= Number(rangevalue) // price filter must use the state
             )
             .map((value, index) => {
               // Find hover image for this product (same name but with category = "hover")
@@ -720,7 +732,9 @@ function Bags() {
                           width: "150px",
                         }}
                       >
-                        <b style={{ fontSize: "15px" }}>{`₹ ${value.price.toLocaleString("en-IN")}`}</b>
+                        <b
+                          style={{ fontSize: "15px" }}
+                        >{`₹ ${value.price.toLocaleString("en-IN")}`}</b>
                         <div
                           style={{
                             width: "80px",
@@ -745,31 +759,29 @@ function Bags() {
                           </span>
                         </div>
                       </div>
-                     
-                          <button
-                            id="shoe-cart-button"
-                            onClick={() => cartFun(value._id)}
-                           
+
+                      <button
+                        id="shoe-cart-button"
+                        onClick={() => cartFun(value._id)}
+                      >
+                        <div style={{ height: "25px", position: "relative" }}>
+                          <GlareHover
+                            glareColor="#2a2ad3"
+                            glareOpacity={0.8}
+                            glareAngle={-30}
+                            glareSize={300}
+                            transitionDuration={800}
+                            playOnce={false}
                           >
-                             <div style={{ height: "25px", position: "relative" }}>
-                        <GlareHover
-                          glareColor="#2a2ad3"
-                          glareOpacity={0.8}
-                          glareAngle={-30}
-                          glareSize={300}
-                          transitionDuration={800}
-                          playOnce={false}
-                        >
                             Add to cart
-                              </GlareHover>
-                      </div>
-                          </button>
-                      
+                          </GlareHover>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            })):<h3 className="d-flex justify-content-center pt-5 text-capitalize"> no products available in this price range</h3>}
         </div>
         <br />
       </div>

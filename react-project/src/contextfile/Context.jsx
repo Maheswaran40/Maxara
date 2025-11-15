@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Mycontext from "./Mycontext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import fashonboys from "../assets/images/fashon-boys-lineup.jpg";
 
 function Context({ children }) {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState();
 
   // about page function start
   const [activeTab, setActiveTab] = useState({
@@ -56,7 +57,8 @@ function Context({ children }) {
   };
 
   // **************************************** PRODUCTS FETCH ****************************************
-  const url = "https://maxara-backend.onrender.com";
+  // const url = "https://maxara-backend.onrender.com";
+  const url = "http://localhost:3000";
   const viewFun = async () => {
     try {
       const databaseData = await axios.get(`${url}/list`);
@@ -111,7 +113,7 @@ function Context({ children }) {
   const [cartlist, setCartlist] = useState([]);
   const [price, setPrice] = useState(0);
 
-  const cartFun = (cartid) => {
+  const cartFun = async (cartid) => {
     const cartProduct = productList.find((value) => value._id === cartid) || {};
     setcartTab(cartProduct);
 
@@ -127,6 +129,12 @@ function Context({ children }) {
         return sum + cleanPrice * item.quantity;
       }, 0);
       setPrice(total);
+      console.log("userId", userId);
+      const usr = localStorage.getItem("user");
+      const resp = await axios.put(`${url}/addCart/${usr}`, {
+        cart: updatedCartlist,
+      });
+      console.log("resp", resp);
 
       toast.success("Added to cart");
     } else {
@@ -178,8 +186,20 @@ function Context({ children }) {
     }, 0);
     setPrice(total);
   };
+  const location = useLocation();
+  const fil = location.state?.range;
 
   const [rangevalue, setRangevalue] = useState(1500);
+
+  // When page loads, set value only if coming from a Link
+  useEffect(() => {
+    if (fil !== undefined) {
+      setRangevalue(fil);
+    } else {
+      setRangevalue(1500); // reset to initial
+    }
+  }, [location.pathname]);
+  console.log(rangevalue, "fil");
 
   // **************************************** USER FORM ****************************************
   const [username, setUsername] = useState("");
@@ -190,22 +210,19 @@ function Context({ children }) {
     e.preventDefault();
     try {
       const formData = { username, email, password };
-      await axios.post(
-        "https://maxara-backend.onrender.com/userData",
-        formData
-      );
+      await axios.post(` ${url}`, formData);
       toast.success("Your data registered successfully...");
       setUsername("");
       setEmail("");
       setPassword("");
       navigate("/");
     } catch (err) {
-       // ✅ Handle duplicate error cleanly
-    if (err.response?.status === 400 && err.response?.data?.message) {
-      toast.error(err.response.data.message); // shows "Email already exists"
-    } else {
-      toast.error("Email already exist");
-    }
+      // ✅ Handle duplicate error cleanly
+      if (err.response?.status === 400 && err.response?.data?.message) {
+        toast.error(err.response.data.message); // shows "Email already exists"
+      } else {
+        toast.error("Email already exist");
+      }
       console.log("Form posting error:", err);
     }
   };
@@ -213,28 +230,38 @@ function Context({ children }) {
   var [userData, setUserData] = useState([]);
   var [loginName, setLoginName] = useState("");
   var [loginPassword, setLoginPassword] = useState("");
+  const random = Math.floor(Math.random() * 10) + 1;
   const getUser = async (e) => {
     e.preventDefault();
     try {
       const databaseData = await axios.get(`${url}/getUser`);
-       const users = databaseData.data;
-       const foundUser = users.find((u) => u.email === loginName && u.password === loginPassword);
+      const users = databaseData.data.userdata;
+      var cart;
+      const foundUser = users.find(
+        (u) => u.email === loginName && u.password === loginPassword
+      );
 
-        if (foundUser) {
-      console.log("✅ Login successful", foundUser);
+      if (foundUser) {
+        setUserId(foundUser.email);
+        const foundCart = databaseData.data.cart.find(
+          (u) => u.email === foundUser.email
+        );
+        cart = foundCart;
+        console.log('cart', cart)
+        console.log("✅ Login successful", foundUser);
 
-      setUserData(foundUser);
-      // navigate to home (uncomment if you imported useNavigate in Form)
-       localStorage.setItem("isLoggedIn", "true");  // 🔥 must be string
-      navigate("/home");
-    } else {
-      alert("❌ Invalid Email or Password");
-    }
+        setUserData(foundUser);
+        // navigate to home (uncomment if you imported useNavigate in Form)
+        localStorage.setItem("isLoggedIn", random);
+        localStorage.setItem("user", foundUser.email);
+        navigate("/home");
+      } else {
+        alert("❌ Invalid Email or Password");
+      }
       setUserData(databaseData.data);
       console.log(databaseData.data);
       console.log(loginName);
       console.log(loginPassword);
-      
     } catch (err) {
       console.log(err);
     }
@@ -281,7 +308,9 @@ function Context({ children }) {
     userData,
     getUser,
     setLoginName,
-    setLoginPassword,loginName,loginPassword
+    setLoginPassword,
+    loginName,
+    loginPassword,
   };
 
   return (

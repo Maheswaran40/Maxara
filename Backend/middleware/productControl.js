@@ -66,7 +66,7 @@
 
 const dataModel = require("../model/userModel");
 
-// ➕ Add product
+//  Add product
 const addData = async (req, res) => {
   try {
     const product_Data = new dataModel({
@@ -76,17 +76,17 @@ const addData = async (req, res) => {
       price: req.body.price,
       category: req.body.category,
       desc: req.body.desc,
-      url: req.body.url   // will contain base64 string     // optional if you save Cloudinary URL
+      url: req.body.url   // will contain base64 string    
     });
 
     await product_Data.save();
-    res.status(200).send("Data added successfully ✅");
+    res.status(200).send("Data added successfully");
   } catch (err) {
     res.status(404).send(`Error name: ${err.name}, message: ${err.message}`);
   }
 };
 
-// 📥 Get all products
+//  Get all products
 const getData = async (req, res) => {
   try {
     const getproduct = await dataModel.find();
@@ -96,7 +96,7 @@ const getData = async (req, res) => {
   }
 };
 
-// ✏️ Update product by ID
+// Update product by ID
 const updateData = async (req, res) => {
   try {
     const updateProduct = await dataModel.findByIdAndUpdate(
@@ -110,11 +110,11 @@ const updateData = async (req, res) => {
   }
 };
 
-// ❌ Delete product by ID
+//  Delete product by ID
 const deleteData = async (req, res) => {
   try {
     await dataModel.findByIdAndDelete(req.params.id);
-    res.status(200).send({ message: "Deleted successfully ✅" });
+    res.status(200).send({ message: "Deleted successfully " });
   } catch (err) {
     res.status(404).send(`Error name: ${err.name}, message: ${err.message}`);
   }

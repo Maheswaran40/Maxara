@@ -124,6 +124,7 @@ function Tshirts() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
         </div>
@@ -439,6 +440,7 @@ function Tshirts() {
             id="range"
             min={100}
             max={3000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
           <br />
@@ -643,8 +645,15 @@ function Tshirts() {
             .filter(
               (value) =>
                 value.folder === "tshirts" &&
-                (value.category === "shop" || value.category === "newarrival")
+                (value.category === "shop" || value.category === "newarrival")  && value.price<=rangevalue
+            ).length>0 ? (
+              productList
+            .filter(
+              (value) =>
+                value.folder === "tshirts" &&
+                (value.category === "shop" || value.category === "newarrival")  && value.price<=rangevalue
             )
+            
             .map((value, index) => {
               // Find hover image for this product (same name but with category = "hover")
               const hoverImage = productList.find(
@@ -740,7 +749,7 @@ function Tshirts() {
                   </div>
                 </div>
               );
-            })}
+            })):<h3 className='d-flex justify-content-center pt-5'>no products available in this price range</h3>}
         </div>
         <br />
       </div>

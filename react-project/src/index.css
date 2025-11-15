@@ -644,7 +644,7 @@ h3 {
 #shoe-card {
   position: relative; /* make the card the positioning context */
   border: 1px solid #eee;
-  border-radius: 12px;
+  border-radius: 5px;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;

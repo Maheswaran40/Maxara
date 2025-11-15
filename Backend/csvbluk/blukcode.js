@@ -29,7 +29,7 @@ fs.createReadStream("csvbluk/imageData.csv", { encoding: "utf8" })
         }
 
         if (!normalizedRow.filename) {
-          console.warn("⚠️ Skipping row without filename:", normalizedRow);
+          console.warn("Skipping row without filename:", normalizedRow);
           continue;
         }
         await dataModel.updateOne(
@@ -44,7 +44,7 @@ fs.createReadStream("csvbluk/imageData.csv", { encoding: "utf8" })
                 : null,
               category: (normalizedRow.category || "").trim(),
               desc: (normalizedRow.desc || "").trim(),
-              offer: (normalizedRow.offer || "").trim(),           // ✅ new
+              offer: (normalizedRow.offer || "").trim(),           
       dashprice: (!isNaN(parseFloat(normalizedRow.dashprice)) )? parseFloat(normalizedRow.dashprice)
                 : null
             }

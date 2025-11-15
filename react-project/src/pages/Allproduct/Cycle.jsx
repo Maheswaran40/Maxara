@@ -61,7 +61,8 @@ function Cycle() {
             type="range"
             id="range"
             min={100}
-            max={3000}
+            max={15000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
         </div>
@@ -376,7 +377,8 @@ function Cycle() {
             type="range"
             id="range"
             min={100}
-            max={3000}
+            max={15000}
+            value={rangevalue}
             onChange={(e) => setRangevalue(Number(e.target.value))}
           />
           <br />
@@ -581,7 +583,13 @@ function Cycle() {
             .filter(
               (value) =>
                 value.folder === "cycle" &&
-                (value.category === "shop" || value.category === "newarrival")
+                (value.category === "shop" || value.category === "newarrival") && value.price <= Number(rangevalue)
+            ).length >0 ? (
+              productList
+            .filter(
+              (value) =>
+                value.folder === "cycle" &&
+                (value.category === "shop" || value.category === "newarrival") && value.price <= Number(rangevalue)
             )
             .map((value, index) => {
               // Find hover image for this product (same name but with category = "hover")
@@ -694,7 +702,7 @@ function Cycle() {
                   </div>
                 </div>
               );
-            })}
+            })):<h3 className="d-flex justify-content-center pt-5 text-capitalize"> no products available in this price range</h3>}
         </div>
         <br />
       </div>
