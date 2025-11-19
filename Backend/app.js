@@ -6,7 +6,7 @@ const app=express()
 
 const cors=require("cors")
 app.use(cors({
-    origin:"https://maxara-the-greatest-market-2755.onrender.com/",
+    origin:"https://maxara-the-greatest-market-2755.onrender.com",
     methods:["POST","GET","PUT","DELETE"]
 }))
 
