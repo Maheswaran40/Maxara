@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import fashonboys from "../assets/images/fashon-boys-lineup.jpg";
 
 function Context({ children }) {
+  console.log('executed context')
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
 
@@ -73,7 +74,7 @@ function Context({ children }) {
   useEffect(() => {
     viewFun();
   }, []);
-
+  
   // **************************************** SEARCH ****************************************
   const [searchdata, setData] = useState("");
   const searchFun = (e) => {

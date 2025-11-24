@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   var { productList } = useContext(Mycontext);
+  
   return (
     <>
       <div id="home">
