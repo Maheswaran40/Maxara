@@ -15,6 +15,10 @@ app.use(express.json({limit:"50mb"}))
 app.get('/', (req, res) => {
     res.send('Server Running');
 });
+app.get('/home', (req, res) => {
+    res.send('Server Running');
+});
+
 
 const dotenv=require("dotenv");
 dotenv.config()
