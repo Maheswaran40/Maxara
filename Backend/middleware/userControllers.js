@@ -32,6 +32,8 @@ const getUserdata = async (req, res) => {
 
     }
 }
+
+// cart post
 const addCart = async (req, res) => {
     console.log('req.body', req.params, req.body)
     const { id } = req.params;
@@ -55,4 +57,13 @@ const addCart = async (req, res) => {
 
     }
 }
+//  Delete product by ID
+const deleteData = async (req, res) => {
+  try {
+    await customerdata_model.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Deleted successfully " });
+  } catch (err) {
+    res.status(404).send(`Error name: ${err.name}, message: ${err.message}`);
+  }
+};
 module.exports = { userData, getUserdata, addCart } 

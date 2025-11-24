@@ -57,12 +57,15 @@ function Context({ children }) {
   };
 
   // **************************************** PRODUCTS FETCH ****************************************
- const url = "https://maxara-backend.onrender.com";
-//  const url = "http://localhost:3000";
+  //  const url = "https://maxara-backend.onrender.com";
+  const url = "http://localhost:3000";
   const viewFun = async () => {
     try {
       const databaseData = await axios.get(`${url}/list`);
       setProductList(databaseData.data);
+      const cartdata = await axios.get(`${url}/getUser`);
+      const cartItems = cartdata.data.cart[0].cart;
+      console.log(cartItems);
     } catch (err) {
       console.log(err);
     }
@@ -247,7 +250,7 @@ function Context({ children }) {
           (u) => u.email === foundUser.email
         );
         cart = foundCart;
-        console.log('cart', cart)
+        console.log("cart", cart);
         console.log("✅ Login successful", foundUser);
 
         setUserData(foundUser);
