@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import fashonboys from "../assets/images/fashon-boys-lineup.jpg";
 
 function Context({ children }) {
+  console.log("Executed Context");
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
 
