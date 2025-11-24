@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-
+console.log(isLoggedIn,"isLoggedIn" )
   if (!isLoggedIn) {
     // Not logged in → redirect to login
     return <Navigate to="/" replace />;
