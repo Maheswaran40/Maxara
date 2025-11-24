@@ -13,7 +13,7 @@ app.use(cors({
 
 app.use(express.json({limit:"50mb"}))
 app.get('/', (req, res) => {
-    console.log('Server Running');
+    res.send('Server Running');
 });
 
 const dotenv=require("dotenv");
