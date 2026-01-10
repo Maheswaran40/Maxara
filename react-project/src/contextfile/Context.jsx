@@ -58,8 +58,8 @@ function Context({ children }) {
   };
 
   // **************************************** PRODUCTS FETCH ****************************************
-   const url = "https://maxara-backend.onrender.com";
-  // const url = "http://localhost:3000";
+  //  const url = "https://maxara-backend.onrender.com";
+  const url = "http://localhost:3000";
   const viewFun = async () => {
     try {
       const databaseData = await axios.get(`${url}/list`);
@@ -191,7 +191,7 @@ function Context({ children }) {
     setPrice(total);
   };
   const location = useLocation();
-  const fil = location.state?.range;
+  const fil = location.state?<div className="range"></div>: undefined;
 
   const [rangevalue, setRangevalue] = useState(1500);
 
@@ -214,7 +214,7 @@ function Context({ children }) {
     e.preventDefault();
     try {
       const formData = { username, email, password };
-      await axios.post(` ${url}`, formData);
+      await axios.post(`${url}/userData`, formData);
       toast.success("Your data registered successfully...");
       setUsername("");
       setEmail("");

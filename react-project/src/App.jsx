@@ -29,10 +29,17 @@ import Outdoor from './pages/Allproduct/Outdoor'
 import Product2 from './pages/Product2'
 import Product3 from './pages/Product3'
 import ProtectedRoute from './ProtectedRoute';
+import setupLocatorUI from "@locator/runtime";
+
+
 
 function Layout() {
 const location=useLocation()
 const hideLayout=location.pathname==="/" || location.pathname==="/singup"
+if (import.meta.env.DEV) {
+  setupLocatorUI();
+}
+
   return (
     <>
       <Scrolltop />
