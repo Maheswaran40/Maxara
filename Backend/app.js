@@ -10,7 +10,8 @@ app.use(cors({
     origin: [
       "http://localhost:5173",
       "http://localhost:5174", // ✅ ADD THIS
-      "https://maxara-greatest-market.netlify.app"
+      "https://maxara-greatest-market.netlify.app",
+      "https://maxara-greatest-market.netlify.app/"
     ],
     methods:["POST","GET","PUT","DELETE"],
      credentials: true,
