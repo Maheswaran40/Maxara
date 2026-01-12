@@ -6,7 +6,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import fashonboys from "../assets/images/fashon-boys-lineup.jpg";
 
 function Context({ children }) {
-  console.log('executed context')
+  console.log("Executed Context");
+
   const navigate = useNavigate();
   const [userId, setUserId] = useState();
 
@@ -58,6 +59,7 @@ function Context({ children }) {
   };
 
   // **************************************** PRODUCTS FETCH ****************************************
+
   //  const url = "https://maxara-backend.onrender.com";
   const url = "http://localhost:3000";
   const viewFun = async () => {
