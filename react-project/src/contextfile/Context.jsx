@@ -60,8 +60,9 @@ function Context({ children }) {
 
   // **************************************** PRODUCTS FETCH ****************************************
 
-  //  const url = "https://maxara-backend.onrender.com";
-  const url = "http://localhost:3000";
+   const url = "https://maxara-backend.onrender.com";
+  // const url = "http://localhost:3000";
+
   const viewFun = async () => {
     try {
       const databaseData = await axios.get(`${url}/list`);
