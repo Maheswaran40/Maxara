@@ -60,7 +60,8 @@ function Context({ children }) {
 
   // **************************************** PRODUCTS FETCH ****************************************
 
-   const url = "https://project-backend-2hqu.onrender.com";
+   const url = "https://maxara-backend.netlify.app";
+  //  const url = "https://project-backend-2hqu.onrender.com";
   // const url = "http://localhost:3000";
 
   const viewFun = async () => {
