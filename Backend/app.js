@@ -10,7 +10,6 @@ app.use(cors({
     origin: [
       "http://localhost:5173",
       "http://localhost:5174", // ✅ ADD THIS
-      "https://maxara-the-greatest-market-2755.onrender.com",
       "https://maxara-greatest-market.netlify.app"
     ],
     methods:["POST","GET","PUT","DELETE"],
@@ -19,7 +18,9 @@ app.use(cors({
 ))
 
 app.use(express.json({limit:"50mb"}))
-
+app.get("/",(req,res)=>(
+    res.send(`<h1>NOT FOUND</h1>`)
+))
 const dotenv=require("dotenv");
 dotenv.config()
 
