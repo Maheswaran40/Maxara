@@ -1,3 +1,8 @@
+
+
+const dotenv=require("dotenv");
+dotenv.config()
+
 const connectDb = require("./config/db");//database connecting
 connectDb()
 
@@ -23,8 +28,7 @@ app.use(express.json({limit:"50mb"}))
 app.get("/",(req,res)=>(
     res.send(`<h1>NOT FOUND</h1>`)
 ))
-const dotenv=require("dotenv");
-dotenv.config()
+
 
 // product data router
 const router = require("./router/dataRouter");
